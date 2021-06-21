@@ -1,7 +1,7 @@
 
 # Ansible Role Clickhouse
 
-Percona XtraDB Cluster is a database clustering solution for MySQL. It ensures high availability, prevents downtime and data loss, and provides linear scalability for a growing environment.
+ClickHouse is a fast open-source column-oriented database management system that allows generating analytical data reports in real-time using SQL queries.
 
 ## Role Variables
 ### Normal variable
