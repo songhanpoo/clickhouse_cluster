@@ -1,0 +1,22 @@
+all:
+  hosts:
+    node1:
+      ansible_ssh_host: 172.xx.xx.xx
+      ip: 172.xx.xx.xx
+      ansible_ssh_user: vagrant
+      ansible_ssh_private_key_file: ~/.ssh/id_rsa
+      # ansible_ssh_common_args: -o "StrictHostKeyChecking no" -o ProxyCommand="ssh -W %h:%p -q root@172.xx.xx.xx"
+    node2:
+      ansible_ssh_host: 172.xx.xx.xx
+      ip: 172.xx.xx.xx
+      ansible_ssh_user: vagrant
+      ansible_ssh_private_key_file: ~/.ssh/id_rsa
+      # ansible_ssh_common_args: -o "StrictHostKeyChecking no" -o ProxyCommand="ssh -W %h:%p -q root@172.xx.xx.xx"
+  children:
+    master:
+      hosts:
+        node1:
+    backup:
+      hosts:
+        node2:
+

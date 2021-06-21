@@ -1,0 +1,71 @@
+---
+
+- name: Run the equivalent of "apt-get update" as a separate step
+  apt:
+    update_cache: yes
+
+- name: Install a list of packages
+  apt:
+    pkg:
+    - apt-transport-https
+    - ca-certificates
+    - dirmngr
+    - python3-pip
+    state: present
+
+- name: Install lxml for Python 3 specifically, using the 'pip3' executable
+  pip:
+    name: lxml
+    executable: pip3
+
+- name: Add an Apt signing key, will not download if present
+  apt_key:
+    id: E0C56BD4
+    keyserver: hkp://keyserver.ubuntu.com:80
+    state: present
+
+- name: Add specified repository Clickhouse into sources list
+  ansible.builtin.apt_repository:
+    repo: deb https://repo.clickhouse.tech/deb/stable/ main/
+    state: present
+
+- name: Run the equivalent of "apt-get update" as a separate step
+  apt:
+    update_cache: yes
+
+- name: Check Path exists
+  stat:
+    path: "{{clickhouse_path_default_pwd}}"
+  register: clickhouse_path_exist
+
+- name: Ensure Path default pwd exists for deploy file.
+  ansible.builtin.file:
+    path: "{{clickhouse_path_default_pwd}}"
+    owner: root
+    group: root
+    mode: '0640'
+    state: directory
+  when: not clickhouse_path_exist.stat.exists
+    
+- name: Deploy Clickhouse default password.
+  template:
+    src: default-password.xml.j2
+    dest: "{{ clickhouse_path_default_pwd }}/default-password.xml"
+    owner: root
+    group: root
+    mode: 0640
+
+# Example where parent XML nodes are created automatically
+- name: Ensure Clickhouse-server package installed
+  apt:
+    name: "{{ clickhouse_package_name }}"
+    state: present
+
+# - name: debug
+#   ansible.builtin.debug:
+#     msg:
+#       - "SHOW DEBUG: {{ node_ips_self_exclude }}"
+#       - "SHOW DEBUG: {{ ansible_host }}"
+#       - "SHOW DEBUG: {{ inventory_hostname }}"
+#       - "SHOW DEBUG: {{ group_names }}"
+#       - "SHOW DEBUG: {{ groups }}"

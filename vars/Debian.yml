@@ -1,0 +1,4 @@
+clickhouse_package_name: clickhouse-server
+clickhouse_path_config: /etc/clickhouse-server/config.xml
+clickhouse_path_default_pwd: /etc/clickhouse-server/users.d
+node_ips_self_exclude: "{{ groups['all'] | map('extract', hostvars, ['ip']) | join(',') }}"

@@ -1,0 +1,17 @@
+---
+- name: Stop svc ufw firewall
+  ansible.builtin.service:
+    name: ufw
+    state: stopped
+
+- name: Deploy ClickHouse config.
+  template:
+    src: config.xml.j2
+    dest: "{{ clickhouse_path_config }}"
+    owner: clickhouse
+    group: clickhouse
+    mode: 0644
+    # validate: "clickhouse-server settings --config-file={{clickhouse_path_config}}"
+  notify: 
+    - started
+    - reloaded
