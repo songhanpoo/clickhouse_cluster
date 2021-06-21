@@ -1,5 +1,5 @@
 
-# Ansible Role Percona XtraDB Cluster ( Mysql )
+# Ansible Role Clickhouse
 
 Percona XtraDB Cluster is a database clustering solution for MySQL. It ensures high availability, prevents downtime and data loss, and provides linear scalability for a growing environment.
 
