@@ -8,7 +8,7 @@ Percona XtraDB Cluster is a database clustering solution for MySQL. It ensures h
 
 | Variable | Default | Description |
 |------|------|------|
-| `user_default_pwd` | NA | [Reference](https://github.com/ClickHouse/ClickHouse/blob/master/programs/server/config.xml) |
+| `user_default_pwd` | NA | set password for user default before install clickhouse |
 | `logger_level` | trace | [Reference](https://github.com/ClickHouse/ClickHouse/blob/master/programs/server/config.xml) |
 | `logger_log` | /var/log/clickhouse-server/clickhouse-server.log | [Reference](https://github.com/ClickHouse/ClickHouse/blob/master/programs/server/config.xml) |
 | `logger_errorlog` | /var/log/clickhouse-server/clickhouse-server.err.log | [Reference](https://github.com/ClickHouse/ClickHouse/blob/master/programs/server/config.xml) |
